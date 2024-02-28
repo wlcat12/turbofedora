@@ -19,7 +19,7 @@ sudo bash turbofedora.sh
 ```
 This will ask some questions and begin Fedora installation. Data in `/home`, disk configuration (but without LVM and LUKS because i 2 lazy to write code), user accounts and passwords, sudo/wheel group will be preserved. It is also possible to automatically install the best desktop environment (GNOME) with PATCHES into the new system.
 
-![Pasted image 20240228204833.jpg]
+![[PLAFON.jpg]]
 
 > [!IMPORTANT]
 > Everything in `/bin`, `/boot`, `/etc`, `/lib`, `/lib64`, `/sbin`, `/srv`, `/usr` and `/var` will be permanently removed. Other directories will not be affected at all, and no partitions will be formatted.
