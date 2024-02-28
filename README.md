@@ -19,7 +19,7 @@ sudo bash turbofedora.sh
 ```
 This will ask some questions and begin Fedora installation. Data in `/home`, disk configuration (but without LVM and LUKS because i 2 lazy to write code), user accounts and passwords, sudo/wheel group will be preserved. It is also possible to automatically install the best desktop environment (GNOME) with PATCHES into the new system.
 
-![[Pasted image 20240228204833.jpg]]
+![Pasted image 20240228204833.jpg]
 
 > [!IMPORTANT]
 > Everything in `/bin`, `/boot`, `/etc`, `/lib`, `/lib64`, `/sbin`, `/srv`, `/usr` and `/var` will be permanently removed. Other directories will not be affected at all, and no partitions will be formatted.
@@ -29,14 +29,14 @@ This will ask some questions and begin Fedora installation. Data in `/home`, dis
 * x86_64 Linux kernel version suitable for glibc in Fedora (3.2+ for glibc version 2.39)
 * `grep`, `coreutils` and `util-linux`
 * `bash` version 4+
-* `wget` or `curl` and to download Arch Linux bootstrap, `tar` and `xz` to decompress bootstrap archive. You can also manually download and extract [bootstrap archive](https://geo.mirror.pkgbuild.com/iso/latest/) to `/archlinux-bootstrap`
+* `wget` or `curl` and to download Fedora bootstrap, `tar` and `xz` to decompress bootstrap fedoraive. You can also manually download and extract [bootstrap fedoraive](https://geo.mirror.pkgbuild.com/iso/latest/) to `/fedoralinux-bootstrap`
 
 ## Installation process explained
 ### Stage 1 (turbofedora.sh)
 * The script copies needed files to safe place where they will not be removed
 * Downloads Fedora rootfs and extract it to `/fedora-bootstrap` # maybe (i didnt writed a byte of code and i cant garatyee is it work as execpeted)
-* Recursively mounts root to directory `host-system` inside `/fedora-bootstrap` (`mount --rbind / /archlinux-bootstrap/host-system`)
-* Mounts `/sys`, `/dev` and `/proc` to corresponding directories inside `/archlinux-bootstrap`
+* Recursively mounts root to directory `host-system` inside `/fedora-bootstrap` (`mount --rbind / /fedoralinux-bootstrap/host-system`)
+* Mounts `/sys`, `/dev` and `/proc` to corresponding directories inside `/fedoralinux-bootstrap`
 * Copies `stage2.sh` to `/fedora-bootstrap`, chroots and runs the script
 ### Stage 2
 * Removes everything in `/host-system/{bin, boot, etc, lib...}`
@@ -65,7 +65,7 @@ SET_SPACE_PASSWORD=1
 SRAKUT=0
 NETWORKMANAGER=1
 LOCALTIME=Europe/Moscow
-NEWHOSTNAME=archlinux
+NEWHOSTNAME=fedoralinux
 REFLECTOR=1
 FORCE_REBOOT_AFTER_INSTALLATION=1
 ```
@@ -86,7 +86,7 @@ Turbofedora will work on almost any Linux system, because it has very few depend
 * All Distros in a world, trust me
 
 ### I have /home, /var, /tmp, /lib, /usr/X11R6... on different partitions!
-Turboarch basically just doesn't care about your partition scheme. All mountpoints will be transferred to the new system. 
+Turbofedora basically just doesn't care about your partition scheme. All mountpoints will be transferred to the new system. 
 
 ### LVM & LUKS
 It is supported, but if LVM or HRUKS is detected, turbofedora will use SRACUT to generate initramfs. Uhh, always i think?  dracut used by default in
