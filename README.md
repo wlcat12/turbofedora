@@ -1,36 +1,43 @@
-![TurboArch](artwork.png)
+> [!IMPORTANT]
+> Currently WIP, Rewriting on rust because i like ferris
 
-# TurboArch - Seamlessly Replace Your Current OS with Arch Linux NOW!
-This script allows you to replace any Linux distribution with Arch Linux, preserving user data and some system configuration. 
 
+![TurboFedora](artwork.png)
+
+# TurboFedora - Seamlessly Replace Your Current OS with Fedora NOW!
+This script allows you to replace any Linux distribution with Fedora, preserving user data and some system configuration. 
+
+TODO: Remake video
 [Video demonstration on YouTube](https://youtu.be/OCnaunwBoWw) 
 
 ## Quick start
 Download and run required scripts:
 ```
-git clone https://github.com/evgvs/turboarch
-cd turboarch
-sudo bash turboarch.sh
+git clone https://github.com/wlcat12/turbofedora
+cd turbofedora
+sudo bash turbofedora.sh
 ```
-This will ask some questions and begin Arch Linux installation. Data in `/home`, disk configuration (even with LVM and LUKS!), user accounts and passwords, sudo/wheel group will be preserved. It is also possible to automatically install the best desktop environment (GNOME) into the new system.
+This will ask some questions and begin Fedora installation. Data in `/home`, disk configuration (but without LVM and LUKS because i 2 lazy to write code), user accounts and passwords, sudo/wheel group will be preserved. It is also possible to automatically install the best desktop environment (GNOME) with PATCHES into the new system.
+
+![[Pasted image 20240228204833.jpg]]
 
 > [!IMPORTANT]
 > Everything in `/bin`, `/boot`, `/etc`, `/lib`, `/lib64`, `/sbin`, `/srv`, `/usr` and `/var` will be permanently removed. Other directories will not be affected at all, and no partitions will be formatted.
 
 ## Requirements
 * Internet connection
-* x86_64 Linux kernel version suitable for glibc in Arch Linux (3.2+ for glibc version 2.39)
+* x86_64 Linux kernel version suitable for glibc in Fedora (3.2+ for glibc version 2.39)
 * `grep`, `coreutils` and `util-linux`
 * `bash` version 4+
 * `wget` or `curl` and to download Arch Linux bootstrap, `tar` and `xz` to decompress bootstrap archive. You can also manually download and extract [bootstrap archive](https://geo.mirror.pkgbuild.com/iso/latest/) to `/archlinux-bootstrap`
 
 ## Installation process explained
-### Stage 1 (turboarch.sh)
+### Stage 1 (turbofedora.sh)
 * The script copies needed files to safe place where they will not be removed
-* Downloads Arch Linux rootfs and extract it to `/archlinux-bootstrap`
-* Recursively mounts root to directory `host-system` inside `/archlinux-bootstrap` (`mount --rbind / /archlinux-bootstrap/host-system`)
+* Downloads Fedora rootfs and extract it to `/fedora-bootstrap` # maybe (i didnt writed a byte of code and i cant garatyee is it work as execpeted)
+* Recursively mounts root to directory `host-system` inside `/fedora-bootstrap` (`mount --rbind / /archlinux-bootstrap/host-system`)
 * Mounts `/sys`, `/dev` and `/proc` to corresponding directories inside `/archlinux-bootstrap`
-* Copies `stage2.sh` to `/archlinux-bootstrap`, chroots and runs the script
+* Copies `stage2.sh` to `/fedora-bootstrap`, chroots and runs the script
 ### Stage 2
 * Removes everything in `/host-system/{bin, boot, etc, lib...}`
 * Installs the base system with `pacstrap`
@@ -75,24 +82,14 @@ pimp:$y$j9T$LuhFnrcezH0TUA1GaUqwa/$Ptme335MkS61UIlNQ.0jRD1doz7zQFzKIQcP6MXW6O1:1
 ```
 
 ### Tested distributions
-Turboarch will work on almost any Linux system, because it has very few dependencies. It successfully replaced following distributions with Arch Linux:
-* Manjaro
-* Debian
-* Ubuntu
-* Fedora
-* ROSA
-* Astra
-* Void
-* Slackware
-* Gentoo
-* OpenSUSE
-* Tiny Core
+Turbofedora will work on almost any Linux system, because it has very few dependencies. It successfully replaced following distributions with fedora:
+* All Distros in a world, trust me
 
 ### I have /home, /var, /tmp, /lib, /usr/X11R6... on different partitions!
 Turboarch basically just doesn't care about your partition scheme. All mountpoints will be transferred to the new system. 
 
 ### LVM & LUKS
-It is supported, but if LVM or HRUKS is detected, turboarch will use SRACUT to generate initramfs. However, hooks for pacman will be installed, so SRACUT shouldn't be a big problem.
+It is supported, but if LVM or HRUKS is detected, turbofedora will use SRACUT to generate initramfs. Uhh, always i think?  dracut used by default in
 
 ### ZFS
 No, it is currently not supported.
